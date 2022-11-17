@@ -8,6 +8,19 @@
 ## Description
 An application used to help the user create their own notes to keep track of important data or helps to keep track of daily tasks.
 
+## Deployed Link
+[Heroku Deployed Link](https://ricky22m-note-taker.herokuapp.com/)
+
+## Table of Contents
+* [Description](#description)
+* [Deployed Link](#deployed-link)
+* [User Story](#user-story)
+* [Acceptance Criteria](#acceptance-criteria)
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Questions](#questions)
+
 ## User Story
 
 ```
@@ -33,13 +46,6 @@ THEN that note appears in the right-hand column
 WHEN I click on the Write icon in the navigation at the top of the page
 THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
 ```
-
-## Table of Contents
-* [Description](#description)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Contributing](#contributing)
-* [License](#license)
 
 ## Installation
 Run the command inside the terminal `npm i`, then run in the command inside the terminal `node server.js`
