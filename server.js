@@ -9,36 +9,44 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, '/idex.html'));
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 app.get('/notes', (req,res) => {
-    res.sendFile(path.join(__dirname, '/notes.html'));
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
 app.get('/api/notes', (req,res) => {
-    fs.readFile('./db/db.json', 'utf8', (err, data) => {
-        if (err) throw err;
-        var notes = JSON.parse(data);
-        res.json(notes);
-    });
+    res.sendFile(path.join(__filename, './db/db.json'));
 });
 
-app.get('/api/notes/:id', (req,res) => {
-    res.json(notes[req.params.id]);
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 app.post('/api/notes', (req, res) => {
-    fs.readFile('./db/db.json', 'utf8', (err, data) => {
-        if (err) throw err;
-        var notes = JSON.parse(data);
-        let userNotes = req.body;
-        userNotes.id = Math.floor(Math.random() * 10000);
-        notes.push(userNotes);
+    const { title, text } = req.body;
+    let id = uuid();
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+        const notesDB = JSON.parse(data);
+        notesDB.push({ title, text, id });
+        const newDB = JSON.stringify(notesDB);
+        fs.writeFile('./db/db.json', 'utf-8', newDB, (err, data) => {
+            if (err) {
+                console.error();
+            } else {
+                console.log('Added New Note!');
+            }
+        });
     });
-    fs.writeFile('./db/db.json', 'utf8', (err, data) => {
-        res.json(userNotes);
+    res.sendFile(path.join(__dirname, './db/db.json'));
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+        const deleteNote = JSON.parse(data);
+        let deleteUserId = req.params.id.toString();
     });
 });
 
