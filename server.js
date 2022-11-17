@@ -26,28 +26,26 @@ app.get('*', (req,res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-    const { title, text } = req.body;
-    let id = uuid();
-    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
-        const notesDB = JSON.parse(data);
-        notesDB.push({ title, text, id });
-        const newDB = JSON.stringify(notesDB);
-        fs.writeFile('./db/db.json', 'utf-8', newDB, (err, data) => {
-            if (err) {
-                console.error();
-            } else {
-                console.log('Added New Note!');
-            }
-        });
-    });
-    res.sendFile(path.join(__dirname, './db/db.json'));
+    let newNote = req.body;
+    let allNotes = JSON.parse(fs.readFile('./db/db.json', 'utf8'));
+    let noteLength = allNotes.noteLength.toString();
+    
+    newNote.id = noteLength
+
+    fs.writeFileSync('./db/db.json', JSON.stringify(allNotes));
+    res.sendFile(allNotes);
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
-        const deleteNote = JSON.parse(data);
-        let deleteUserId = req.params.id.toString();
+    let allNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+    let noteId = req.body.id.stringify();
+
+    allNotes = allNotes.filter(selected => {
+        return selected.id != noteId;
     });
+
+    fs.writeFileSync('./db/db.json', JSON.stringify(allNotes));
+    res.json(allNotes);
 });
 
 app.listen(PORT, () => {
