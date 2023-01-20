@@ -1,0 +1,14 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "a place used to help the user take down notes at any time they need them",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
