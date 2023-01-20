@@ -10,8 +10,7 @@
 A web application used to allow the user to take any sort of notes anywhere, any time, and even on the go!
 
 ## Deployed Link
-[//]: <> (Add deployed link)
-[Deployed Application Link Here]()
+[Deployed Heroku Application Link Here](https://ricky22m-note-taker.herokuapp.com/notes)
 
 ## Table of Contents
 * [User Story](#user-story)
